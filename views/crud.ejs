@@ -1,0 +1,83 @@
+<form action="/crud/create" method="POST">
+
+    id:-<input type="text" name="id" value="<%=editdata?editdata._id:"" %>"><br><br>
+
+
+    <label for="f_name">First Name:</label>
+    <input type="text" id="f_name" name="f_name" value="<%= (editdata) ? editdata.f_name : '' %>"><br><br>
+
+    <label for="l_name">Last Name:</label>
+    <input type="text" id="l_name" name="l_name" value="<%= (editdata) ? editdata.l_name : '' %>"><br><br>
+
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="male" <%=(editdata && editdata.gender==='male' ) ? 'checked' : '' %>> Male
+    <input type="radio" name="gender" value="female" <%=(editdata && editdata.gender==='female' ) ? 'checked' : '' %>>
+    Female<br><br>
+
+    <label>Hobby:</label>
+    <input type="checkbox" name="hobby" value="cricket" <%=(editdata && editdata.hobby.includes('cricket')) ? 'checked'
+        : '' %>> Cricket
+    <input type="checkbox" name="hobby" value="hockey" <%=(editdata && editdata.hobby.includes('hockey')) ? 'checked'
+        : '' %>> Hockey
+    <input type="checkbox" name="hobby" value="football" <%=(editdata && editdata.hobby.includes('football'))
+        ? 'checked' : '' %>> Football
+    <input type="checkbox" name="hobby" value="kabaddi" <%=(editdata && editdata.hobby.includes('kabaddi')) ? 'checked'
+        : '' %>> Kabaddi
+    <input type="checkbox" name="hobby" value="wrestling" <%=(editdata && editdata.hobby.includes('wrestling'))
+        ? 'checked' : '' %>> Wrestling
+    <input type="checkbox" name="hobby" value="driving" <%=(editdata && editdata.hobby.includes('driving')) ? 'checked'
+        : '' %>> Driving<br><br>
+
+    <label for="city">City:</label>
+    <select id="city" name="city">
+        <option value="surat" <%=(editdata && editdata.city==='surat' ) ? 'selected' : '' %>>Surat</option>
+        <option value="ahmedabad" <%=(editdata && editdata.city==='ahmedabad' ) ? 'selected' : '' %>>Ahmedabad</option>
+        <option value="vadodara" <%=(editdata && editdata.city==='vadodara' ) ? 'selected' : '' %>>Vadodara</option>
+        <option value="bhavnagar" <%=(editdata && editdata.city==='bhavnagar' ) ? 'selected' : '' %>>Bhavnagar</option>
+        <option value="rajkot" <%=(editdata && editdata.city==='rajkot' ) ? 'selected' : '' %>>Rajkot</option>
+        <option value="mumbai" <%=(editdata && editdata.city==='mumbai' ) ? 'selected' : '' %>>Mumbai</option>
+    </select>
+    <button type="submit">Create</button>
+</form>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Hobby</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% alldata.map((item,index)=> { %>
+            <tr>
+                <td>
+                    <%= item._id %>
+                </td>
+                <td>
+                    <%= item.f_name %>
+                </td>
+                <td>
+                    <%= item.l_name %>
+                </td>
+                <td>
+                    <%= item.gender %>
+                </td>
+                <td>
+                    <%= item.hobby%>
+                </td>
+                <td>
+                    <%= item.city %>
+                </td>
+                <td>
+                    <button><a href="crud/delete?delet=<%= item._id %>">Delete</a></button>
+                    <button><a href="crud/updete?up=<%= item._id %>">Edit</a></button>
+                </td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>
